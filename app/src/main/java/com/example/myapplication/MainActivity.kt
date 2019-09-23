@@ -3,7 +3,6 @@ package com.example.myapplication
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.Button
 import android.widget.Toast
 import retrofit2.Call
@@ -14,9 +13,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.webservice.WebService
 import androidx.recyclerview.widget.DividerItemDecoration
-
-
-
 
 class MainActivity : AppCompatActivity() {
 
@@ -63,41 +59,53 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun fetchData() {
-        val webServiceInterface = WebService.getWebServiceInterface()
-        val callCancel = webServiceInterface!!.keyWords
-        val getKeywordDelegate = GetKeywordDelegate(this)
-        callCancel.enqueue(getKeywordDelegate)
+        if (!NetworkUtils.isConnectedToNetwork(applicationContext)) {
+            Toast.makeText(
+                applicationContext,
+                getString(R.string.try_again_explain_text),
+                Toast.LENGTH_LONG
+            ).show()
+        } else {
+            val webServiceInterface = WebService.getWebServiceInterface()
+            val callCancel = webServiceInterface!!.keyWords
+            val getKeywordDelegate = GetKeywordDelegate(this)
+            callCancel.enqueue(getKeywordDelegate)
+        }
     }
 
-    private class GetKeywordDelegate constructor(activity: MainActivity): Callback<ArrayList<String>> {
+    private class GetKeywordDelegate constructor(activity: MainActivity) :
+        Callback<ArrayList<String>> {
         val TAG: String = GetKeywordDelegate::class.java.simpleName
-        private val activityWeekReference: WeakReference<MainActivity>
+        private val activityWeekReference: WeakReference<MainActivity> = WeakReference<MainActivity>(activity)
 
-        init {
-            this.activityWeekReference = WeakReference<MainActivity>(activity)
-        }
-
-
-        override fun onResponse(call: Call<ArrayList<String>>, response: Response<ArrayList<String>>) {
+        override fun onResponse(
+            call: Call<ArrayList<String>>,
+            response: Response<ArrayList<String>>
+        ) {
             val activity = activityWeekReference.get()
-           activity?.let {
-               val checkAppIsNotDestroyed = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
-                   !activity.isFinishing && !activity.isDestroyed
-               } else {
-                   !activity.isFinishing
-               }
-               if (checkAppIsNotDestroyed) {
-                   activity.listItem.clear()
-                   activity.listItem.addAll(response.body())
-                   activity.refreshListKeyword()
-               }
-           }
+            activity?.let {
+                val checkAppIsNotDestroyed =
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+                        !activity.isFinishing && !activity.isDestroyed
+                    } else {
+                        !activity.isFinishing
+                    }
+                if (checkAppIsNotDestroyed) {
+                    activity.listItem.clear()
+                    activity.listItem.addAll(response.body())
+                    activity.refreshListKeyword()
+                }
+            }
         }
 
         override fun onFailure(call: Call<ArrayList<String>>, t: Throwable) {
             activityWeekReference.get()?.let {
                 t.message?.let {
-                    Toast.makeText(activityWeekReference.get()!!.applicationContext, it, Toast.LENGTH_LONG).show()
+                    Toast.makeText(
+                        activityWeekReference.get()!!.applicationContext,
+                        it,
+                        Toast.LENGTH_LONG
+                    ).show()
                 }
             }
         }

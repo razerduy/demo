@@ -2,4 +2,5 @@
     <string name="app_name">My Application</string>
     <string name="try_again">Thử lại</string>
     <string name="hot_keyword_text">Từ khoá hot</string>
+    <string name="try_again_explain_text">Thiết bị chưa có kết nối mạng, vui lòng bật kết nối mạng và nhấn nút thử lại để tải</string>
 </resources>

@@ -12,6 +12,7 @@ import java.lang.StringBuilder
 import java.util.*
 import kotlin.math.abs
 import android.graphics.drawable.GradientDrawable
+import android.widget.Toast
 
 
 class AdapterKeyword(val data: List<String>) :
@@ -58,7 +59,10 @@ class AdapterKeyword(val data: List<String>) :
             val rnd = Random()
             llbackground.setBackgroundResource(R.drawable.background_keyword)
             val drawable = llbackground.background as GradientDrawable
-            drawable.setColor(Color.parseColor(arrayColors.get(rnd.nextInt(arrayColors.size))))
+            drawable.setColor(Color.parseColor(arrayColors[rnd.nextInt(arrayColors.size)]))
+            itemView.setOnClickListener {
+                Toast.makeText(itemView.context, txtKeyword.text, Toast.LENGTH_SHORT).show()
+            }
         }
 
         private fun findContentForFirstLine(parts: List<String>, keyword: String): StringBuilder {
