@@ -13,6 +13,9 @@ import java.lang.ref.WeakReference
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.webservice.WebService
+import androidx.recyclerview.widget.DividerItemDecoration
+
+
 
 
 class MainActivity : AppCompatActivity() {
@@ -45,6 +48,14 @@ class MainActivity : AppCompatActivity() {
         listKeyword = findViewById(R.id.listKeyword)
         listKeyword.layoutManager = layoutManager
         listKeyword.adapter = listKeywordAdapter
+        val dividerItemDecoration = DividerItemDecoration(
+            listKeyword.context,
+            layoutManager.orientation
+        )
+        ResourceUtils.getDrawable(applicationContext, R.drawable.item_decoration_keyword)?.let {
+            dividerItemDecoration.setDrawable(it)
+        }
+        listKeyword.addItemDecoration(dividerItemDecoration)
     }
 
     private fun refreshListKeyword() {

@@ -13,28 +13,35 @@
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="16dp"
-        android:text="Từ khoá hot"
+        android:text="@string/hot_keyword_text"
         android:textColor="@android:color/black"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/listKeyword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingVertical="10dp"
-        android:id="@+id/listKeyword"
-        app:layout_constraintTop_toBottomOf="@+id/textView2"
-        app:layout_constraintStart_toStartOf="parent"
+        android:orientation="horizontal"
+        android:paddingHorizontal="@dimen/padding_horizontal_list_keyword"
+        android:paddingVertical="@dimen/padding_vertical_list_keyword"
+        android:paddingStart="@dimen/padding_horizontal_list_keyword"
+        android:paddingLeft="@dimen/padding_horizontal_list_keyword"
+        android:paddingTop="@dimen/padding_vertical_list_keyword"
+        android:paddingEnd="@dimen/padding_horizontal_list_keyword"
+        android:paddingRight="@dimen/padding_horizontal_list_keyword"
+        android:paddingBottom="@dimen/padding_vertical_list_keyword"
         app:layout_constraintEnd_toEndOf="parent"
-        android:orientation="horizontal" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
     <Button
+        android:id="@+id/btTry"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/try_again"
-        android:id="@+id/btTry"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

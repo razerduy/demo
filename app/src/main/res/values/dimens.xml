@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="item_text_size_keyword">14sp</dimen>
+    <dimen name="item_containt_height_keyword">76sp</dimen>
+    <dimen name="padding_content_keyword">10dp</dimen>
+    <dimen name="padding_vertical_list_keyword">10sp</dimen>
+    <dimen name="padding_horizontal_list_keyword">1sp</dimen>
+</resources>
