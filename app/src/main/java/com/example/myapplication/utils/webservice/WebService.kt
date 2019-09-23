@@ -1,6 +1,6 @@
-package com.example.myapplication.webservice
+package com.example.myapplication.utils.webservice
 
-import com.example.myapplication.MyApplication
+import com.example.myapplication.application.MyApplication
 
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor

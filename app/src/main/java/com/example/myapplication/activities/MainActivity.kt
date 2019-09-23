@@ -1,4 +1,4 @@
-package com.example.myapplication
+package com.example.myapplication.activities
 
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
@@ -11,8 +11,12 @@ import retrofit2.Response
 import java.lang.ref.WeakReference
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.myapplication.webservice.WebService
+import com.example.myapplication.utils.webservice.WebService
 import androidx.recyclerview.widget.DividerItemDecoration
+import com.example.myapplication.adapter.AdapterKeyword
+import com.example.myapplication.utils.NetworkUtils
+import com.example.myapplication.R
+import com.example.myapplication.utils.ResourceUtils
 
 class MainActivity : AppCompatActivity() {
 
@@ -48,7 +52,10 @@ class MainActivity : AppCompatActivity() {
             listKeyword.context,
             layoutManager.orientation
         )
-        ResourceUtils.getDrawable(applicationContext, R.drawable.item_decoration_keyword)?.let {
+        ResourceUtils.getDrawable(
+            applicationContext,
+            R.drawable.item_decoration_keyword
+        )?.let {
             dividerItemDecoration.setDrawable(it)
         }
         listKeyword.addItemDecoration(dividerItemDecoration)
@@ -68,7 +75,8 @@ class MainActivity : AppCompatActivity() {
         } else {
             val webServiceInterface = WebService.getWebServiceInterface()
             val callCancel = webServiceInterface!!.keyWords
-            val getKeywordDelegate = GetKeywordDelegate(this)
+            val getKeywordDelegate =
+                GetKeywordDelegate(this)
             callCancel.enqueue(getKeywordDelegate)
         }
     }

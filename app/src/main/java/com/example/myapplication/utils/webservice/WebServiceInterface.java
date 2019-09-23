@@ -1,4 +1,4 @@
-package com.example.myapplication.webservice;
+package com.example.myapplication.utils.webservice;
 
 
 import java.util.ArrayList;

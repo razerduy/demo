@@ -1,4 +1,4 @@
-package com.example.myapplication
+package com.example.myapplication.adapter
 
 import android.graphics.Color
 import android.util.Log
@@ -13,6 +13,7 @@ import java.util.*
 import kotlin.math.abs
 import android.graphics.drawable.GradientDrawable
 import android.widget.Toast
+import com.example.myapplication.R
 
 
 class AdapterKeyword(val data: List<String>) :

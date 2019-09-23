@@ -1,8 +1,9 @@
-package com.example.myapplication
+package com.example.myapplication.application
 
 import android.app.Application
 import android.content.Context
 import androidx.multidex.MultiDex
+import com.example.myapplication.BuildConfig
 
 
 class MyApplication : Application() {
